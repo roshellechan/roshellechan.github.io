@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Directions API</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        h1 {
+            font-size: 26px;
+            margin-bottom: 2%;
+            margin-top: 2%;
+        }
+        
+        p {
+        margin-bottom: 0;
+        }
+
+        #link {
+          margin-bottom: 4%
+        };
+
+
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .page-footer {
+            font-size: 14px;
+            background-color: whitesmoke;
+        }
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <!-- Brand -->
+            <a class="navbar-brand" href="../index.html">Google Tutorial Demos</a>
+            
+            <!-- Links -->
+            <ul class="navbar-nav">
+            
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Week 1
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="MyMaps.htm">MyMaps</a>
+                    <a class="dropdown-item" href="MapsJS.htm">Maps JavaScript</a>
+                    <a class="dropdown-item" href="Directions.htm">Directions</a>
+                    <a class="dropdown-item" href="Places.htm">Places</a>
+                </div>
+                </li>
+            </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Directions API - Get Started </h1>
+        <p>The direction request below has the following parameters:</p>
+        <ul>
+          <li>Origin: Fleming College Frost Campus</li>
+          <li>Destination: Thai By Joe</li>
+          <li>Mode: Walking</li>
+          <li>Waypoints: 55 Adelaide St S, Kawartha Dairy, Terry's Fish & Chips, Kawartha Lakes Police Services</li>
+          <li>Optimized route between waypoints</li>
+        </ul>
+        
+        <p id="link"><a href = https://maps.googleapis.com/maps/api/directions/json?origin=Fleming+College+-+Frost+Campus&destination=Thai+By+Joe+-+Lindsay&mode=walking&waypoints=optimize:true|55+Adelaide+St+S,+Lindsay,+ON+K9V+3J6|Kawartha+Dairy+Lindsay|Terry%27s+Fish+%26+Chips+Seafood+Grill|Kawartha+Lakes+Police+Services&key=AIzaSyDTR4lGo6GLRL5PAPVUtlL7vpVZsmj6u-U>Link to JSON file</a></p>
+
+    </div>
+          
+    <!-- Footer -->
+    <footer class="page-footer font-small">
+        <div class="footer-copyright text-center py-3">Created by Roshelle Chan | 
+            <a href="https://developers.google.com/maps/documentation/directions/start"> Tutorial Reference </a>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
+
+

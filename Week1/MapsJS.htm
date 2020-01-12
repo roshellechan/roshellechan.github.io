@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Maps JavaScript API</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        h1 {
+            font-size: 26px;
+            margin-bottom: 2%;
+            margin-top: 2%;
+        }
+        
+        p {
+        margin-bottom: 0;
+        }
+
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 90%;
+        }
+
+        #geomap {
+        height: 50%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .page-footer {
+            font-size: 14px;
+            background-color: whitesmoke;
+        }
+
+        .container {
+            margin-bottom:3%;
+        }
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <!-- Brand -->
+            <a class="navbar-brand" href="../index.html">Google Tutorial Demos</a>
+            
+            <!-- Links -->
+            <ul class="navbar-nav">
+            
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Week 1
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="MyMaps.htm">MyMaps</a>
+                    <a class="dropdown-item" href="MapsJS.htm">Maps JavaScript</a>
+                    <a class="dropdown-item" href="Directions.htm">Directions</a>
+                    <a class="dropdown-item" href="Places.htm">Places</a>
+                </div>
+                </li>
+            </ul>
+    </nav>
+
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // Location of Maastricht
+        var Maas = {lat: 50.856, lng: 5.693};
+        // Location of UWCM
+        var UWCM = {lat: 50.855, lng:5.721};
+
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {
+                zoom: 13, center: Maas, mapTypeId: 'hybrid'});
+        
+        var contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<div id="bodyContent">'+
+        '<p><b>UWC Maastricht</b> is a United World College located in Maastricht, the Netherlands.' +
+        'I studied here from 2014 to 2016 for my final two years of high school, '+
+        'where I lived with students from over 100 countries and completed the '+
+        'International Baccalaureate Diploma Program.'+
+        '</p>'+
+        '</div>'+
+        '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        // The marker, centered at UWCMaastricht added animation
+        marker = new google.maps.Marker({
+        map: map,
+        animation: google.maps.Animation.DROP,
+        position: UWCM,
+        icon: 'UWCM.png',
+        title: 'United World College Maastricht'
+        });
+
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+   
+        marker.addListener('click', toggleBounce);
+        }
+
+        function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+        }
+    </script>
+
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTR4lGo6GLRL5PAPVUtlL7vpVZsmj6u-U&callback=initMap&language=ja&region=NL"
+    async defer></script>
+    
+    <div class="container">
+        <h1>Maps JavaScript API - Overview </h1>
+        <p>Map of Maastricht:</p>
+        <ul>
+            <li>Changed location, zoom level, and map type</li>
+            <li>Added custom marker at UWC Maastricht (my high school)</li>
+            <li>Changed language to Japanese</li>
+            <li>Added info window</li> 
+            <li>Added animation to marker - bounces up and down if clicked on and stops if clicked on again
+        </ul>
+    </div>
+          
+    <!-- Footer -->
+    <footer class="page-footer font-small">
+        <div class="footer-copyright text-center py-3">Created by Roshelle Chan | 
+            <a href="https://developers.google.com/maps/documentation/javascript/tutorial"> Tutorial Reference </a>
+        </div>
+    </footer>
+
+  </body>
+</html>
+
+
+
