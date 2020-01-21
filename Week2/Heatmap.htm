@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Heatmap</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+      
+        <style>
+        h1 {
+            font-size: 26px;
+            margin-top: 2%;
+        }
+        
+        p {
+            margin-bottom: 0;
+        }
+        
+        ul {
+            margin-bottom: 5%;
+        }
+      
+        .page-footer {
+          font-size: 14px;
+          background-color: whitesmoke;
+        }
+  
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+         #mapid {
+          height: 70%;
+          width: 78%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+  
+ 
+          .page-footer {
+              font-size: 14px;
+              background-color: whitesmoke;
+          }
+  
+       </style>
+      </head>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <!-- Logo -->
+        <a class="navbar-brand" href="../index.html">Google Tutorial Demos</a>
+      
+        <!-- Links -->
+        <ul class="navbar-nav">
+      
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Week 1</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="../Week1/MyMaps.htm">MyMaps</a>
+              <a class="dropdown-item" href="../Week1/MapsJS.htm">Maps JavaScript</a>
+              <a class="dropdown-item" href="../Week1/Directions.htm">Directions</a>
+              <a class="dropdown-item" href="../Week1/Places.htm">Places</a>
+            </div>
+          </li>
+  
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Week 2</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="AddMarker.htm">Add Marker</a>
+              <a class="dropdown-item" href="Clustering.htm">Clustering</a>
+              <a class="dropdown-item" href="Earthquakes.htm">Earthquakes</a>
+              <a class="dropdown-item" href="Heatmap.htm">Heatmap</a>
+            </div>
+          </li>
+  
+        </ul>
+      </nav>
+
+    <div id="mapid"></div>
+
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('mapid'), {
+          zoom: 2,
+          center: new google.maps.LatLng(35.325580, 17.721553),
+          mapTypeId: 'terrain'
+        });
+
+
+        // Create a <script> tag and set the USGS URL as the source.
+        var script = document.createElement('script');
+
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+        script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+      }
+
+      function eqfeed_callback(results) {
+        var heatmapData = [];
+        for (var i = 0; i < results.features.length; i++) {
+          var coords = results.features[i].geometry.coordinates;
+          var latLng = new google.maps.LatLng(coords[1], coords[0]);
+          heatmapData.push(latLng);
+        }
+        var heatmap = new google.maps.visualization.HeatmapLayer({
+          data: heatmapData,
+          dissipating: false,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-egVCO_rN6HwCo5S4fujU16u_49e4TI&libraries=visualization&callback=initMap">
+    </script>
+
+    <div class="container">
+        <h1>Heatmap</h1>
+        <p>Heatmaps make it easy for viewers to understand the distribution of earthquakes, 
+            reported by USGS. Rather than placing a marker on each epicenter, heatmaps use 
+            color and shape to represent the distribution of the data. In this example, red 
+            represents areas of high earthquake activity.</p>  
+    </div>
+
+  <!-- Footer -->
+  <footer class="page-footer font-small">
+    <div class="footer-copyright text-center py-3">Created by Roshelle Chan | 
+        <a href="https://developers.google.com/maps/documentation/javascript/earthquakes"> Tutorial Reference </a>
+    </div>
+  </footer>
+
+  </body>
+</html>
+
+
+

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Marker Clustering</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+      <style>
+      h1 {
+          font-size: 26px;
+          margin-bottom: 2%;
+      }
+      
+      p {
+          padding-top: 2%;
+          margin-bottom: 0;
+      }
+      
+      ul {
+          margin-bottom: 5%;
+      }
+    
+      .page-footer {
+        font-size: 14px;
+        background-color: whitesmoke;
+      }
+
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #map {
+        height: 70%;
+        width: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+            font-size: 26px;
+            margin-bottom: 2%;
+            margin-top: 2%;
+        }
+        
+        p {
+        margin-bottom: 0;
+        }
+
+        .page-footer {
+            font-size: 14px;
+            background-color: whitesmoke;
+        }
+
+        .container {
+            margin-bottom:3%;
+        }
+      </style>
+    </head>
+    <body>
+      
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+      <!-- Logo -->
+      <a class="navbar-brand" href="../index.html">Google Tutorial Demos</a>
+    
+      <!-- Links -->
+      <ul class="navbar-nav">
+    
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Week 1</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="../Week1/MyMaps.htm">MyMaps</a>
+            <a class="dropdown-item" href="../Week1/MapsJS.htm">Maps JavaScript</a>
+            <a class="dropdown-item" href="../Week1/Directions.htm">Directions</a>
+            <a class="dropdown-item" href="../Week1/Places.htm">Places</a>
+          </div>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Week 2</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="AddMarker.htm">Add Marker</a>
+            <a class="dropdown-item" href="Clustering.htm">Clustering</a>
+            <a class="dropdown-item" href="Earthquakes.htm">Earthquakes</a>
+            <a class="dropdown-item" href="Heatmap.htm">Heatmap</a>
+          </div>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {lat: 52.8066622, lng: -97.8796897}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+          {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}); 
+      }
+      var locations = [
+        {lat: 43.130554, lng: -80.746666},
+        {lat: 43.466667, lng: -80.516670},
+        {lat: 48.382221, lng: -89.246109},
+        {lat: 43.116669, lng: -79.199997},
+        {lat: 47.516666, lng: -79.683334},
+        {lat: 43.370834, lng: -80.981941},
+        {lat: 46.533333, lng: -84.349998},
+        {lat: 42.999443, lng: -82.308891},
+        {lat: 44.299999, lng: -78.316666},
+        {lat: 44.566666, lng: -80.933334},
+        {lat: 45.424721, lng: -75.695000},
+        {lat: 43.060001, lng: -79.106667},
+        {lat: 42.983612, lng: -81.249725},
+        {lat: 44.233334, lng: -76.500000},
+        {lat: 49.766666, lng: -94.483330},
+        {lat: 44.349998, lng: -78.750000},
+        {lat: 43.549999, lng: -80.250000},
+        {lat: 46.383331, lng: -82.650002},
+        {lat: 45.027500, lng: -74.739998},
+        {lat: 45.483334, lng: -75.199997},
+        {lat: 43.397221, lng: -80.311386},
+        {lat: 44.583332, lng: -75.683334},
+        {lat: 43.166668, lng: -80.250000},
+        {lat: 44.166668, lng: -77.383331},
+        {lat: 46.238888, lng: -63.129166},
+        {lat: 63.748611, lng: -68.519722},
+        {lat: 44.666668, lng: -63.566666},
+        {lat: 47.518890, lng: -52.805832},
+        {lat: 54.312195, lng: -130.327087},
+        {lat: 53.916943, lng: -122.749443},
+        {lat: 49.835278, lng: -124.524719},
+        {lat: 49.283054, lng: -122.831665},
+        {lat: 49.262501, lng: -122.781113},
+        {lat: 49.233891, lng: -124.805000},
+        {lat: 49.233334, lng: -122.683334},
+        {lat: 49.314999, lng: -124.311996},
+        {lat: 49.316666, lng: -123.066666}
+      ]
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-egVCO_rN6HwCo5S4fujU16u_49e4TI&callback=initMap">
+    </script>
+
+    <div class="container">
+      <h1>Marker Clustering</h1>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="page-footer font-small">
+      <div class="footer-copyright text-center py-3">Created by Roshelle Chan | 
+          <a href="https://developers.google.com/maps/documentation/javascript/marker-clustering"> Tutorial Reference </a>
+      </div>
+  </footer>
+
+  </body>
+</html>

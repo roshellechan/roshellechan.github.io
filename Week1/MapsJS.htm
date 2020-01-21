@@ -65,6 +65,18 @@
                     <a class="dropdown-item" href="Places.htm">Places</a>
                 </div>
                 </li>
+
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Week 2</a>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="../Week2/AddMarker.htm">Add Marker</a>
+                    <a class="dropdown-item" href="../Week2/Clustering.htm">Clustering</a>
+                    <a class="dropdown-item" href="../Week2/Earthquakes.htm">Earthquakes</a>
+                    <a class="dropdown-item" href="../Week2/Heatmap.htm">Heatmap</a>
+                    </div>
+                </li>                
             </ul>
     </nav>
 
@@ -124,15 +136,9 @@
         }
         }
     </script>
-
-    <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTR4lGo6GLRL5PAPVUtlL7vpVZsmj6u-U&callback=initMap&language=ja&region=NL"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-egVCO_rN6HwCo5S4fujU16u_49e4TI&callback=initMap&language=ja&region=NL"
     async defer></script>
-    
+
     <div class="container">
         <h1>Maps JavaScript API - Overview </h1>
         <p>Map of Maastricht:</p>
@@ -151,6 +157,10 @@
             <a href="https://developers.google.com/maps/documentation/javascript/tutorial"> Tutorial Reference </a>
         </div>
     </footer>
+   
+
+    
+
 
   </body>
 </html>
