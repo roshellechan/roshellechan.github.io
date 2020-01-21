@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-egVCO_rN6HwCo5S4fujU16u_49e4TI&callback=map_init"></script>
+    <script type="text/javascript">
+        function InitializeMap() {
+            var ltlng = [];
+
+            ltlng.push(new google.maps.LatLng(17.22, 78.28));
+            ltlng.push(new google.maps.LatLng(13.5, 79.2));
+            ltlng.push(new google.maps.LatLng(15.24, 77.16));
+            ltlng.push(new google.maps.LatLng(31.613136, 63.950476));
+            
+
+            var myOptions = {
+                zoom: 2,
+                center: ltlng[0],
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+            for (var i = 0; i < ltlng.length; i++) {
+                var marker = new google.maps.Marker
+                    (
+                    {
+                        // position: new google.maps.LatLng(-34.397, 150.644),
+                        position: ltlng[i],
+                        map: map,
+                        title: 'Click me',
+                        icon: 'newmarker.png'
+                    }
+                    );
+            }
+            //***********ROUTING****************//
+
+            //Intialize the Path Array
+            var path = new google.maps.MVCArray();
+
+            //Intialize the Direction Service
+            var service = new google.maps.DirectionsService();
+
+
+            var flightPath = new google.maps.Polyline({
+            path: ltlng,
+            geodesic: true,
+            strokeColor: '#4986E7',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+            });
+
+            flightPath.setMap(map);
+
+        }
+
+        window.onload = InitializeMap;
+
+    </script>
+    <h2>Creating Your First Google Map Demo:</h2>
+    <div id="map" style="width: 800px; top: 68px; left: 172px; position: absolute; height: 500px">
+    </div>
+
+  </body>
+</html>
+
+
+

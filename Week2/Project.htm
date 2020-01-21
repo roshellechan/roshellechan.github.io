@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Heatmap</title>
+        <title>Personal Project</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -30,9 +30,8 @@
   
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
-         #mapid {
-          height: 70%;
-          width: 78%;
+         #mymap {
+          height: 100%;
         }
         /* Optional: Makes the sample page fill the window. */
         html, body {
@@ -40,8 +39,7 @@
           margin: 0;
           padding: 0;
         }
-  
- 
+
           .page-footer {
               font-size: 14px;
               background-color: whitesmoke;
@@ -84,16 +82,36 @@
         </ul>
       </nav>
 
+      <div id="mymap"></div>
+      <div id="info"></div>
+
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-egVCO_rN6HwCo5S4fujU16u_49e4TI&callback=initMap">
+  </script>
+  
+  <script>
+    function initMap() {
+      var mapDiv = document.getElementById("mymap");
+      var mapOptions = { 
+        center: new google.maps.LatLng (47, -100),
+        zoom: 4,
+        mapTypeId: google.maps.mapTypeId.ROADMAP
+      };
+      var destinations = [];
+      destinations.push (new google.maps.LatLng(36, -199));
+      destinations.push (new google.maps.LatLng(40, -74));
+      destinations.push (new google.maps.LatLng(36, -102));
+
+      var polylineOptions = {path: destinations};
+      var polyline = new google.maps.Polyline( polylineOptions);
+      polyline.setMap(map);
+    }
+  </script>
 
 
-    <div class="container">
-        <h1>Heatmap</h1>
-        <p>Heatmaps make it easy for viewers to understand the distribution of earthquakes, 
-            reported by USGS. Rather than placing a marker on each epicenter, heatmaps use 
-            color and shape to represent the distribution of the data. In this example, red 
-            represents areas of high earthquake activity.</p>  
-    </div>
 
+
+    
   <!-- Footer -->
   <footer class="page-footer font-small">
     <div class="footer-copyright text-center py-3">Created by Roshelle Chan | 
