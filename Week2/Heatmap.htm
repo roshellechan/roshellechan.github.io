@@ -16,7 +16,7 @@
         }
         
         p {
-            margin-bottom: 0;
+            margin-bottom: 2%;
         }
         
         ul {
@@ -31,7 +31,7 @@
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
          #mapid {
-          height: 70%;
+          height: 100%;
           width: 78%;
         }
         /* Optional: Makes the sample page fill the window. */
@@ -42,10 +42,16 @@
         }
   
  
-          .page-footer {
-              font-size: 14px;
-              background-color: whitesmoke;
-          }
+        .page-footer {
+            font-size: 14px;
+            background-color: whitesmoke;
+        }
+
+        #addmargin {
+          margin-left: 18%;
+          margin-bottom: 0%;
+          height: 100%;
+        }
   
        </style>
       </head>
@@ -85,7 +91,7 @@
         </ul>
       </nav>
 
-    <div id="mapid"></div>
+    <div id="addmargin"><div id="mapid"></div></div>
 
     <script>
       var map;

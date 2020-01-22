@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Personal Project</title>
+        <title>Galapagos Islands</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -17,6 +17,8 @@
         
         p {
             margin-bottom: 0;
+            padding-top: 1%;
+            padding-bottom: 1%;
         }
         
         ul {
@@ -30,8 +32,11 @@
   
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
-         #mymap {
+         #dvMap {
           height: 100%;
+          width:100%;
+          margin-top: 2%;
+          margin-bottom: 5%;
         }
         /* Optional: Makes the sample page fill the window. */
         html, body {
@@ -82,40 +87,204 @@
         </ul>
       </nav>
 
-      <div id="mymap"></div>
-      <div id="info"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-egVCO_rN6HwCo5S4fujU16u_49e4TI&callback=map_init"></script>
 
-      <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-egVCO_rN6HwCo5S4fujU16u_49e4TI&callback=initMap">
-  </script>
-  
-  <script>
-    function initMap() {
-      var mapDiv = document.getElementById("mymap");
-      var mapOptions = { 
-        center: new google.maps.LatLng (47, -100),
-        zoom: 4,
-        mapTypeId: google.maps.mapTypeId.ROADMAP
-      };
-      var destinations = [];
-      destinations.push (new google.maps.LatLng(36, -199));
-      destinations.push (new google.maps.LatLng(40, -74));
-      destinations.push (new google.maps.LatLng(36, -102));
+<script>
 
-      var polylineOptions = {path: destinations};
-      var polyline = new google.maps.Polyline( polylineOptions);
-      polyline.setMap(map);
-    }
-  </script>
-
-
-
-
+    var content1 = 
+    "<div><img src='Images/pic1.jpg' height='150'><br/><br><b>Land Iguana</b><br/>Land Iguanas can grow to almost 1m in length and males can weigh up to 14kg. This Iguana lives in the drier areas of the islands.</div>"
     
+    var content2 = 
+    "<div><img src='Images/pic2.jpg' height='167'><br/><br><b>Red-Footed Booby</b><br/>Red-footed Boobies are the smallest of all booby species. They feed at sea, nest on the ground and perch in coastal trees.</div>"
+    
+    var content3 = 
+    "<div><img src='Images/pic3.jpg' height='150'><br/><br><b>FrigateBird</b><br/>The Frigatebird, also known as a “pirate bird”, has a wingspan that often exceeds 2m.</div>"
+    
+    var content4 = 
+    "<div><img src='Images/pic4.jpg' height='150'><br/><br><b>Green Sea Turtle</b><br/>These turtles are one of the larges sea turtles in the world, weighing up to 150 kg and feeding mainly on algae. They are powerful and graceful swimmers because of their flippers.</div>"
+    
+    var content5 = 
+    "<div><img src='Images/pic5.jpg' height='140'><br/><br><b>Galapagos Giant Tortoise</b><br/>This species is the largest living species of tortoise and the oldest Giant Tortoise lived to be 152. They nap about 16 hours a day and can even survive up to a year without eating or drinking.</div>"
+    
+    var content6 = 
+    "<div><img src='Images/pic6.jpg' height='150'><br/><br><b>Galapagos Penguin</b><br/>The Galapagos Penguin is the only penguin species found north of the equator. They can be distinguished by their relatively large bill and narrow white line around the face.</div>"
+    
+    var content7 = 
+    "<div><img src='Images/pic7.jpg' height='175'><br/><br><b>Galapagos Fur Seal</b><br/>Galapagos Fur Seals spend about 70% of their lives on the land. They can be found around the rocky shores of the Galapagos Islands.</div>"
+    
+    var content8 = 
+    "<div><img src='Images/pic8.jpg' height='200'><br/><br><b>Galapagos Flamingo</b><br/>Galapagos Flamingos are the most brilliantly coloured of all. Their pink colours comes from their primary food source of crustaceans that contains a pigment.</div>"
+    
+    var content9 = 
+    "<div><img src='Images/pic9.jpg' height='200'><br/><br><b>Sea Lions</b><br/>Galapagos Sea Lions are very social and the sounds they make resemble a dog’s bark.</div>"
+    
+    var content10 = 
+    "<div><img src='Images/pic10.jpg' height='250'><br/><br><b>Waved Albatross</b><br/>The Waved Albatross is the largest of all the birds living in the Galapagos. They are only found on this island.</div>"
+    
+    var content11 = 
+    "<div><img src='Images/pic11.jpg' height='185'><br/><br><b>Brown Pelican</b><br/>Brown Pelicans are endemic to the Galapagos and are known to be graceful flyers. They build their nests in mangrove trees or in low lying coastal bushes such as salt bushes. </div>"
+    
+    var markers = [
+    {
+        "title": 'Santa Cruz Island',
+        "lat": '-0.6281502',
+        "lng": '-90.4996429',
+        "description": content1
+    },
+    {
+        "title": 'North Seymour Island',
+        "lat": '-0.3960',
+        "lng": '-90.2878',
+        "description": content2
+    },
+    {
+        "title": 'Bartolome Island',
+        "lat": '-0.2843',
+        "lng": '-90.5506',
+        "description": content3
+    },
+    {
+        "title": 'Santiago Island',
+        "lat": '-0.2620',
+        "lng": '-90.7153',
+        "description": content4
+    },
+    {
+        "title": 'Isabela Island',
+        "lat": '-0.256055',
+        "lng": '-91.278324',
+        "description": content5
+    },
+    {
+        "title": 'Fernandina Island',
+        "lat": '-0.4124',
+        "lng": '-91.4821',
+        "description": content6
+    },
+    {
+        "title": 'Punta Moreno',
+        "lat": '-0.6917',
+        "lng": '-91.3202',
+        "description": content7
+    },
+    {
+        "title": 'Puerto Villamil',
+        "lat": '-0.955852',
+        "lng": '-90.9664535',
+        "description": content8
+    },
+    {
+        "title": 'Floreana Island',
+        "lat": '-1.2902527',
+        "lng": '-90.5017775',
+        "description": content9
+    },
+    {
+        "title": 'Española Island',
+        "lat": '-1.3777643',
+        "lng": '-89.7169646',
+        "description": content10
+    },
+    {
+        "title": 'San Cristobal Island',
+        "lat": '-0.8201145',
+        "lng": '-89.574745',
+        "description": content11
+    }
+    ];
+    
+    window.onload = LoadMap;
+    
+    function LoadMap() {
+        
+        var mapOptions = {
+            center: new google.maps.LatLng(-0.6087106,-90.4074427),
+            zoom: 9,
+            mapTypeId: 'terrain'
+        };
+       
+        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+ 
+        //Create and open InfoWindow.
+        var infoWindow = new google.maps.InfoWindow();
+ 
+        for (var i = 0; i < markers.length; i++) {
+            var data = markers[i];
+            
+            var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+            
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                animation: google.maps.Animation.DROP,
+                title: data.title,
+                icon: 'turtle.png'
+            });
+
+            //Attach click event to the marker.
+            (function (marker, data) {
+                google.maps.event.addListener(marker, "click", function (e) {
+                    //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                    infoWindow.setContent('<div style="width:250px">' + data.description + '</div>');
+                    infoWindow.open(map, marker);                   
+                });
+            })(marker, data);
+        }
+
+
+        //***********ROUTING****************//
+
+        //Intialize the Path Array
+        var path = new google.maps.MVCArray();
+
+        //Intialize the Direction Service
+        var service = new google.maps.DirectionsService();
+       
+        var ltlng = [];
+
+        for (var i = 0; i < markers.length; i++) {
+            var data = markers[i]
+            ltlng.push(new google.maps.LatLng(data.lat, data.lng));       
+        }
+
+        var flightPath = new google.maps.Polyline({
+          path: ltlng,
+          geodesic: true,
+          strokeColor: '#e74c3c',
+          strokeOpacity: 1.0,
+          strokeWeight: 3
+        });
+
+        flightPath.setMap(map);
+        
+    }
+</script>
+
+<div class="container" >
+  <h1>Discover the Galapagos Islands Wildlife Tour</h1>
+  <p>The Galapagos Islands are a chain of islands in the eastern Pacific Ocean. The Galapagos lie about 966 kilometers off 
+    of the Ecuadorian coast. There are thirteen major islands and a several smaller islands 
+    that make up the archipelago. Repeated volcanic eruptions helped to form the rugged mountain 
+    landscape of the Galapagos Islands.</p>
+
+  <p>Inspired by the <a href="https://www.chimuadventures.com/blog/2018/05/galapagos-island-guide/">Chimu Adventures blog,</a>
+    this map is a virtual tour of the Galapagos Islands, one of the world's most unique destinations known
+    for their astonishing sights and captivating wildlife. Meet and learn about the friendly inhabitants 
+    of the Galapagos by clicking on each turtle icon that represents the locations of where these species
+    can be found. Endemic species include the giant Galapagos tortoise, the marine iguana, and the Galapagos
+    penguin. </p>
+    
+  <p><i>Use this handy tool to help you plan your future visit to the wildlife-viewing paradise!</i></p> 
+
+</div>
+
+<div class="container" id="dvMap"></div>
+
+
   <!-- Footer -->
   <footer class="page-footer font-small">
     <div class="footer-copyright text-center py-3">Created by Roshelle Chan | 
-        <a href="https://developers.google.com/maps/documentation/javascript/earthquakes"> Tutorial Reference </a>
+        <a href="https://developers.google.com/maps/documentation/javascript/shapes"> Tutorial Reference </a>
     </div>
   </footer>
 
