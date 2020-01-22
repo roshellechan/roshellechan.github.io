@@ -92,7 +92,11 @@ function initMap() {
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 15, center: vulcan});
   // The marker, positioned at Vulcan
-  var marker = new google.maps.Marker({position: vulcan, map: map});
+  var marker = new google.maps.Marker({
+    position: vulcan, 
+    map: map,
+    icon: 'volcano.png'
+  });
 }
     </script>
     <!--Load the API from the specified URL
