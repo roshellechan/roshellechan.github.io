@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ArcGIS JS API Tutorials: Access traffic using OAuth2</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.13/"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+    html,
+    body, #viewDiv{
+      font-family: Avenir Next W00;
+      font-size: 14px;
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .action {
+      color: blue;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    </style>
+
+<script>
+  require([
+    "esri/portal/Portal",
+    "esri/identity/OAuthInfo",
+    "esri/identity/IdentityManager",
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/layers/MapImageLayer",
+    "dojo/dom-style",
+    "dojo/dom-attr",
+    "dojo/on",
+    "dojo/dom"
+  ], function(
+      Portal, OAuthInfo, identityManager, Map, MapView, MapImageLayer,
+      domStyle, domAttr, on, dom) {
+
+    // ArcGIS Online or your portal address
+    var portalUrl = "https://www.arcgis.com/sharing";
+
+    // subsitute your own client ID to identify who spawned the login and check for a matching redirect URI
+    var info = new OAuthInfo({
+      appId: "kAGURdpTRCJ6Rcgw",
+      popup: false // inline redirects don't require any additional app configuration
+    });
+
+    identityManager.registerOAuthInfos([info]);
+
+    // send users to arcgis.com to login
+    on(dom.byId("sign-in"), "click", function() {
+      identityManager.getCredential(portalUrl);
+    });
+
+    // log out and reload
+    on(dom.byId("sign-out"), "click", function() {
+      identityManager.destroyCredentials();
+      window.location.reload();
+    });
+
+    identityManager.checkSignInStatus(portalUrl).then(function() {
+     dom.byId('anonymousPanel').style.display = 'none';
+     dom.byId('personalizedPanel').style.display = 'block'
+   });
+
+  });
+</script>
+
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+      <!-- Logo -->
+      <a class="navbar-brand" href="../index.html">Google Tutorial Demos</a>
+    
+      <!-- Links -->
+      <ul class="navbar-nav">
+    
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Week 1</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="../Week1/MyMaps.htm">MyMaps</a>
+            <a class="dropdown-item" href="../Week1/MapsJS.htm">Maps JavaScript</a>
+            <a class="dropdown-item" href="../Week1/Directions.htm">Directions</a>
+            <a class="dropdown-item" href="../Week1/Places.htm">Places</a>
+          </div>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Week 2</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="../Week2/AddMarker.htm">Add Marker</a>
+            <a class="dropdown-item" href="../Week2/Clustering.htm">Clustering</a>
+            <a class="dropdown-item" href="../Week2/Earthquakes.htm">Earthquakes</a>
+            <a class="dropdown-item" href="../Week2/Heatmap.htm">Heatmap</a>
+            <a class="dropdown-item" href="../Week2/Project.htm">Project</a>
+          </div>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Week 3</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="AccessService.htm">Access services with OAuth 2.0</a>
+              <a class="dropdown-item" href="GetRouteandDirections.htm">Get a route and directions</a>
+              <a class="dropdown-item" href="QueryFeatureLayer.htm">Query a feature layer</a>
+            </div>
+          </li>        
+
+      </ul>
+    </nav>
+
+  <div id="anonymousPanel" style="display: block; padding: 5px; text-align: center;">
+    <span id="sign-in" class="action">Sign In</span> to see live traffic.
+  </div>
+
+  <div id="personalizedPanel" style="display: none; padding: 5px; text-align: center;">
+    Welcome <span id="userId" style="font-weight: bold;"></span> &nbsp;-&nbsp;
+    <span id="sign-out" class="action">Sign Out</span>
+  </div>
+  <!-- for the map -->
+  <div id="viewDiv" style="display: none;"></div>
+</body>
+</html>
