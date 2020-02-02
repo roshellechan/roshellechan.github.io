@@ -1,93 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Add Marker</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <style>
-        h1 {
-            font-size: 26px;
-            margin-bottom: 2%;
-            margin-top: 2%;
-        }
-        
-        h2 {
-          font-size: 18px;
-          margin-bottom: 2%;
-        }
-        p {
-        margin-bottom: 0;
-        }
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ArcGIS JavaScript Tutorials: Get a route and directions</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  
+  <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.13/"></script>
+  
+  <script>  
+    require([
+      "esri/Map",
+      "esri/views/MapView",      
+      "esri/Graphic",
+      "esri/tasks/RouteTask",
+      "esri/tasks/support/RouteParameters",
+        "esri/tasks/support/FeatureSet"
+    ], function(Map, MapView, Graphic, RouteTask, RouteParameters, FeatureSet) {
 
-        /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
-        #map {
-            height: 70%;
-        }
-        /* Optional: Makes the sample page fill the window. */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        .page-footer {
-            font-size: 14px;
-            background-color: whitesmoke;
-        }
+      var map = new Map({
+        basemap: "streets-navigation-vector"
+      });
+      
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-118.24532,34.05398],
+        zoom: 12
+      });
+      
+      // To allow access to the route service and prevent the user from signing in, do the Challenge step in the lab to set up a service proxy
+      
+      var routeTask = new RouteTask({
+         url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"
+      });
 
-        .container {
-            margin-bottom:3%;
+      view.on("click", function(event){
+        if (view.graphics.length === 0) {
+          addGraphic("start", event.mapPoint);
+        } else if (view.graphics.length === 1) {
+          addGraphic("finish", event.mapPoint);
+          // Call the route service
+          getRoute();
+        } else {
+          view.graphics.removeAll();
+          addGraphic("start",event.mapPoint);
         }
-    </style>
-  </head>
-  <body>
-
-    <nav class="navbar navbar-expand-sm bg-light navbar-light">
-      <!-- Logo -->
-      <a class="navbar-brand" href="../index.html">GEOM99 Tutorial Demos</a>
+      });
+      
+      function addGraphic(type, point) {
+        var graphic = new Graphic({
+          symbol: {
+            type: "simple-marker",
+            color: (type === "start") ? "white" : "black",
+            size: "8px"
+          },
+          geometry: point
+        });
+        view.graphics.add(graphic);
+      }
     
-      <!-- Links -->
-      <ul class="navbar-nav">
-    
-        <!-- Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Week 1</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="../Week1/MyMaps.htm">MyMaps</a>
-            <a class="dropdown-item" href="../Week1/MapsJS.htm">Maps JavaScript</a>
-            <a class="dropdown-item" href="../Week1/Directions.htm">Directions</a>
-            <a class="dropdown-item" href="../Week1/Places.htm">Places</a>
-          </div>
-        </li>
+      function getRoute() {
+        // Setup the route parameters
+        var routeParams = new RouteParameters({
+          stops: new FeatureSet({
+            features: view.graphics.toArray()
+          }),
+          returnDirections: true
+        });
+        // Get the route
+        routeTask.solve(routeParams).then(function(data) {
+          data.routeResults.forEach(function(result) {
+            result.route.symbol = {
+              type: "simple-line",
+              color: [5, 150, 255],
+              width: 3
+            };
+            view.graphics.add(result.route); 
+          });
+          
+        });
+      }
+      
+      function getRoute() {
+        // Setup the route parameters
+        var routeParams = new RouteParameters({
+          stops: new FeatureSet({
+            features: view.graphics.toArray() // Pass the array of graphics
+          }),
+          returnDirections: true
+        });
+        // Get the route
+        routeTask.solve(routeParams).then(function(data) {
+          // Display the route
+          data.routeResults.forEach(function(result) {
+            result.route.symbol = {
+              type: "simple-line",
+              color: [5, 150, 255],
+              width: 3
+            };
+            view.graphics.add(result.route);
+          });
 
-        <!-- Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Week 2</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="../Week2/AddMarker.htm">Add Marker</a>
-            <a class="dropdown-item" href="../Week2/Clustering.htm">Clustering</a>
-            <a class="dropdown-item" href="../Week2/Earthquakes.htm">Earthquakes</a>
-            <a class="dropdown-item" href="../Week2/Heatmap.htm">Heatmap</a>
-            <a class="dropdown-item" href="../Week2/Project.htm">Project</a>
-          </div>
-        </li>
+          //*** ADD ***//
 
-        <!-- Dropdown -->
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Week 3</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="AccessService.htm">Access services with OAuth 2.0</a>
-              <a class="dropdown-item" href="GetRouteandDirections.htm">Get a route and directions</a>
-              <a class="dropdown-item" href="QueryFeatureLayer.htm">Query a feature layer</a>
-            </div>
-          </li>        
+          // Display the directions
+          var directions = document.createElement("ol");
+          directions.classList = "esri-widget esri-widget--panel esri-directions__scroller";
+          directions.style.marginTop = 0;
+          directions.style.paddingTop = "15px";
 
-      </ul>
-    </nav>
+          // Show the directions
+          var features = data.routeResults[0].directions.features;
+          features.forEach(function(result,i){
+            var direction = document.createElement("li");
+            direction.innerHTML = result.attributes.text + " (" + result.attributes.length.toFixed(2) + " miles)";
+            directions.appendChild(direction);
+          });
+
+          // Add directions to the view
+          view.ui.empty("top-right");
+          view.ui.add(directions, "top-right");
+        });
+      }
+
+
+
+    });
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
