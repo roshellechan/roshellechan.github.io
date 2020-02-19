@@ -6,14 +6,17 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>Feature Layer - display results as an InfoWindow onHover</title>
 
-    <link rel="stylesheet" href="https://js.arcgis.com/3.31/dijit/themes/tundra/tundra.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.31/esri/css/esri.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  
     <style>
       html, body, #mapDiv {
         padding:0;
         margin:0;
         height:100%;
-        font-family: Arial, Helvetica, sans-serif;
       }
       #mapDiv {
         position: relative;
@@ -22,13 +25,24 @@
         background: #fff;
         box-shadow: 0 0 5px #888;
         left: 70px;
-        right: 900px;
+        right: 850px;
         padding: 0.5em;
         position: absolute;
         top: 1em;
         z-index: 40;
       }
+    
+      .page-footer {
+        font-size: 14px;
+        background-color: whitesmoke;
+        margin-top: 3%;
+      }
+
     </style>
+
+
+    <link rel="stylesheet" href="https://js.arcgis.com/3.31/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.31/esri/css/esri.css">
 
     <script src="https://js.arcgis.com/3.31/"></script>
     <script>
@@ -113,10 +127,69 @@
       });
     </script>
   </head>
+
+
   <body class="tundra">
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <!-- Logo -->
+        <a class="navbar-brand" href="../index.html">GEOM99 Tutorial Demos</a>
+      
+        <!-- Links -->
+        <ul class="navbar-nav">
+      
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Week 1</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="../Week1/MyMaps.htm">MyMaps</a>
+              <a class="dropdown-item" href="../Week1/MapsJS.htm">Maps JavaScript</a>
+              <a class="dropdown-item" href="../Week1/Directions.htm">Directions</a>
+              <a class="dropdown-item" href="../Week1/Places.htm">Places</a>
+            </div>
+          </li>
+    
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Week 2</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="../Week2/AddMarker.htm">Add Marker</a>
+              <a class="dropdown-item" href="../Week2/Clustering.htm">Clustering</a>
+              <a class="dropdown-item" href="../Week2/Earthquakes.htm">Earthquakes</a>
+              <a class="dropdown-item" href="../Week2/Heatmap.htm">Heatmap</a>
+              <a class="dropdown-item" href="../Week2/Project.htm">Project</a>
+            </div>
+          </li>
+    
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Week 4 </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="../Week4/AccessService.htm">Access services with OAuth 2.0</a>
+                <a class="dropdown-item" href="../Week4/GetRouteandDirections.htm">Get a route and directions</a>
+                <a class="dropdown-item" href="../Week4/QueryFeatureLayer.htm">Query a feature layer</a>
+              </div>
+            </li>        
+    
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Week 6</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="CanadaMap.htm">Map of Canada</a>
+              </div>
+            </li> 
+            
+        </ul>
+      </nav>
+
+
     <div id="mapDiv">
       <div id="info">
-        Name the Canadian Provinces and Territories! <br> Hover over each province to check your guess.
+        <b>Name the Provinces and Territories in Canada!</b> <br> Hover over each province or territory to check your guess.
       </div>
     </div>
   </body>
