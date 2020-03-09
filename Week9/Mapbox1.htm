@@ -16,7 +16,7 @@
 <script>
 	// Modified example from this source: https://docs.mapbox.com/mapbox-gl-js/example/wms/
 	// Be sure to insert your OWN mapbox token.
-	mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhd25tZmxlbWluZ2MiLCJhIjoiY2p2cW54OWd6MHBsNTQzbW82eGdoMnhiayJ9.J0aHRw_EPtUzVsp0aEIS1g';
+	mapboxgl.accessToken = 'pk.eyJ1Ijoicm9zaGVsbGVjaGFuIiwiYSI6ImNrN2RtNjk4czAweTkza3BldDJhbWhpaDEifQ.wfwTqiJYrKewa_p4gHHvIQ';
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/light-v10',
@@ -28,7 +28,7 @@
         map.addSource('wms-test-source', {
             'type': 'raster',
             'tiles': [
-                'https://roshellechan.duckdns.org/arcgis/rest/services/Canada/CanadaMap/MapServer/export?bbox={bbox-epsg-3857}&bboxSR=EPSG%3A3857&layers=0&layerDefs=&size=256%2c256&imageSR=&format=png&transparent=true&dpi=&time=&layerTimeOptions=&dynamicLayers=&gdbVersion=&mapScale=&f=image'
+                'https://54.91.23.206/arcgis/rest/services/Canada/CanadaMap/MapServer/export?bbox={bbox-epsg-3857}&bboxSR=EPSG%3A3857&layers=0&layerDefs=&size=256%2c256&imageSR=&format=png&transparent=true&dpi=&time=&layerTimeOptions=&dynamicLayers=&gdbVersion=&mapScale=&f=image'
             ],
             'tileSize': 256
         });
@@ -46,3 +46,4 @@
 
 </body>
 </html>
+
