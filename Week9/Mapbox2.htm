@@ -17,16 +17,16 @@
 <script>
 	// Modified from: https://docs.mapbox.com/mapbox-gl-js/example/live-geojson/
 	// Make sure you use your own Access Token
-	mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhd25tZmxlbWluZ2MiLCJhIjoiY2p2cW54OWd6MHBsNTQzbW82eGdoMnhiayJ9.J0aHRw_EPtUzVsp0aEIS1g';
+	mapboxgl.accessToken = 'pk.eyJ1Ijoicm9zaGVsbGVjaGFuIiwiYSI6ImNrN2RtNjk4czAweTkza3BldDJhbWhpaDEifQ.wfwTqiJYrKewa_p4gHHvIQ';
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/roshellechan/ck7l5404e020q1ioajctock3v',
         zoom: 3,
-        center: [-100.0, 50.0]
+        center: [-100.0, 60.0]
     });
     // Modify this to place your own map service URL here. Show one or more provinces--do not just show Ontario like this example. 
     
-    var url = 'https://54.91.23.206/arcgis/rest/services/Canada/CanadaMap/MapServer/0/query?where=PRNAME%3D%27Ontario%27+OR+PRNAME%3D%27Manitoba%27+OR+PRNAME%3D%27Alberta%27&returnGeometry=true&returnTrueCurves=false&returnExtentOnly=false&f=geojson';    
+    var url = 'https://54.91.23.206/arcgis/rest/services/Canada/CanadaMap/MapServer/0/query?where=PRNAME%3D%27Yukon%27+OR+PRNAME%3D%27Manitoba%27+OR+PRNAME%3D%27Alberta%27&returnGeometry=true&returnTrueCurves=false&returnExtentOnly=false&f=geojson';    
     
     map.on('load', function() {
         window.setInterval(function() {
@@ -39,7 +39,7 @@
             'type': 'fill',
             'source': 'canada',
             'layout': {},
-            'paint': {'fill-color': '#088','fill-opacity': 0.8}
+            'paint': {'fill-color': '#ffffff','fill-opacity': 0.35, 'fill-outline-color': '#e74c3c'}
         });
     });
 </script>
